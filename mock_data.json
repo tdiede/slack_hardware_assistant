@@ -1,0 +1,82 @@
+Mock Data (Realistic Hardware Team Data)
+
+Users
+[
+  {"id": "U1", "real_name": "Alice Chen", "title": "PCB Designer"},
+  {"id": "U2", "real_name": "Ben Patel", "title": "Mechanical Engineer"},
+  {"id": "U3", "real_name": "Sara Martinez", "title": "Firmware Engineer"},
+  {"id": "U4", "real_name": "Leo Nakamura", "title": "Electrical Engineer"}
+]
+
+Workspaces
+[
+  {"id": "W1", "name": "Acme Hardware Team"}
+]
+
+Channels
+[
+  {"id": "C1", "name": "hardware-general", "workspace_id": "W1"},
+  {"id": "C2", "name": "pcb-design", "workspace_id": "W1"},
+  {"id": "C3", "name": "mechanical-review", "workspace_id": "W1"},
+  {"id": "C4", "name": "firmware-debug", "workspace_id": "W1"}
+]
+
+
+Messages (sample 60 days)
+[
+  {
+    "ts": "1711000000.001",
+    "channel": "C2",
+    "user": "U1",
+    "text": "Working on the new PCB stack-up. Issues with impedance on layer 3."
+  },
+  {
+    "ts": "1711000555.002",
+    "channel": "C2",
+    "user": "U4",
+    "text": "Power rail noise might be from switching regulators. Need to scope it."
+  },
+  {
+    "ts": "1711001234.003",
+    "channel": "C3",
+    "user": "U2",
+    "text": "Updated the CAD model. Clearance is tight near the hinge."
+  }
+]
+
+Threads
+[
+  {
+    "parent_ts": "1711000555.002",
+    "messages": [
+      {
+        "ts": "1711000666.100",
+        "user": "U1",
+        "text": "Agree — let's isolate the 5V line during testing."
+      },
+      {
+        "ts": "1711000777.101",
+        "user": "U4",
+        "text": "I'll try adding a ferrite bead this afternoon."
+      }
+    ]
+  }
+]
+
+Aggregates (sample)
+Topic counts (past 60 days)
+[
+  {"topic": "PCB", "count": 127},
+  {"topic": "impedance", "count": 34},
+  {"topic": "power", "count": 53},
+  {"topic": "firmware", "count": 61},
+  {"topic": "mechanical", "count": 77}
+]
+
+User message counts
+[
+  {"user": "Alice Chen", "messages": 210},
+  {"user": "Ben Patel", "messages": 134},
+  {"user": "Sara Martinez", "messages": 98},
+  {"user": "Leo Nakamura", "messages": 156}
+]

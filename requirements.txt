@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+psycopg[binary]
+asyncpg
+sqlalchemy
+greenlet
+
+slack_bolt
+slack_sdk

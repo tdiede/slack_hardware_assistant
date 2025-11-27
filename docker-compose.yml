@@ -1,0 +1,29 @@
+services:
+  db:
+    container_name: db
+    image: postgres:18
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      # For Postgres 18+, mount at /var/lib/postgresql so data is stored in
+      # versioned subdirectories compatible with pg_ctlcluster/pg_upgrade.
+      - postgres18_data:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+
+  backend:
+    container_name: backend
+    build: .
+    environment:
+      DB_HOST: db
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  postgres18_data:
