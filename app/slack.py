@@ -1,13 +1,16 @@
 import os 
+import logging
+from dotenv import load_dotenv
 
 from slack_bolt.adapter.fastapi import SlackRequestHandler
 from slack_bolt import App
 
-from slack_sdk import WebClient
+logger = logging.getLogger(__name__)
 
+load_dotenv() # take environment variables from .env.
 
-SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
-SLACK_SIGNING_SECRET = os.getenv("SLACK_SIGNING_SECRET")
+SLACK_BOT_TOKEN = os.environ.get("SLACK_BOT_TOKEN")
+SLACK_SIGNING_SECRET = os.environ.get("SLACK_SIGNING_SECRET")
 
 client = WebClient(token=SLACK_BOT_TOKEN)
 
@@ -32,4 +35,15 @@ def handle_message(body, say):
 
 @bolt_app.event("app_mention")
 def handle_app_mention(body, say):
-    say(f"👋 Hi! I received your message.")
+    _, user, text = parse_body(body)
+    # call LLM or other text analysis tool here with `text` to extract intent/entities
+    # return structured query for database
+    query = f"SELECT user_id, channel_id, text FROM messages WHERE user_id = '%{user}%'"
+    say(f"👋 Hi <@{user}>! I received your message: {text}")
+
+def parse_body(body) -> list[str]:
+    event = body.get("event", {})
+    user = event.get("user")
+    text = event.get("text")
+    logger.info(f"App mentioned by user {user} with text: {text}")
+    return [event, user, text]

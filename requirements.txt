@@ -1,9 +1,13 @@
 fastapi
+dotenv
 uvicorn[standard]
 psycopg[binary]
 asyncpg
 sqlalchemy
 greenlet
+weaviate-client[agents]
+
+requests
 
 slack_bolt
 slack_sdk

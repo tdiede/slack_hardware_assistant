@@ -3,6 +3,7 @@ from uuid import UUID
 
 class UserBase(BaseModel):
     name: str
+    title: str | None = None
 
 class UserCreate(UserBase):
     pass

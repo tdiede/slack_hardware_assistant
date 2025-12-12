@@ -2,9 +2,9 @@
 
 .PHONY: up down build restart logs ps stop db stop_db venv run
 
-# Build images and start all services (backend + Postgres)
+# Build images and start all services
 up:
-	docker compose up --build -d backend db
+	docker compose up --build -d backend
 
 # Stop and remove containers, networks, and volumes created by docker-compose
 # (except named volumes like postgres_data)

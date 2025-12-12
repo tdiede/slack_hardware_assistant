@@ -98,10 +98,12 @@ Fetch new Slack messages every 1 hour or daily.
 app/
   __init__.py
   main.py          # FastAPI app, routes
-  db.py            # DB engine + session + get_db dependency + init_db
+  db.py            # Database connection initialization
+  seed.py          # Seed code to insert test data into database
   models.py        # SQLAlchemy ORM models (User, etc.)
   schemas.py       # Pydantic models (request/response)
   crud.py          # Database operations (create/read users)
+  slack.py         # Slack event subscriptions handling
 
 
 

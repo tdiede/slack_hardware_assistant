@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models import User
 
-async def create_user(session: AsyncSession, name: str, title: str) -> User:
+async def create_user(session: AsyncSession, name: str, title: str | None = None) -> User:
     user = User(name=name, title=title)
     session.add(user)
     await session.commit()
@@ -22,3 +22,5 @@ async def get_users(session: AsyncSession) -> list[User]:
     result = await session.execute(stmt)
     return result.scalars().all()
 
+async def get_user(session: AsyncSession, user_id: UUID) -> User | None:
+    return await get_user_by_id(session, user_id)

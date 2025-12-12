@@ -29,7 +29,7 @@ class Workspace(Base):
 
 class Channel(Base):
     __tablename__ = "channels"
-    __table_args__ = (UniqueConstraint("workspace_id", "name", name="uq_channel_workspace_name"))
+    __table_args__ = (UniqueConstraint("workspace_id", "name", name="uq_channel_workspace_name"),)
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     name = Column(String, nullable=False)
@@ -56,7 +56,7 @@ class Message(Base):
 
 class TopicCounts(Base):
     __tablename__ = "topic_counts"
-    __table_args__ = (PrimaryKeyConstraint("date", "topic", "channel_id", name="pk_topic_counts"))
+    __table_args__ = (PrimaryKeyConstraint("date", "topic", "channel_id", name="pk_topic_counts"),)
 
     date = Column(Date, nullable=False)
     topic = Column(Enum("PCB", "impedance", "power", "firmware", "mechanical", name="topic_enum"), nullable=False)
@@ -66,7 +66,7 @@ class TopicCounts(Base):
 
 class UserMessageCounts(Base):
     __tablename__ = "user_message_counts"
-    __table_args__ = (PrimaryKeyConstraint("date", "user_id", "channel_id", name="pk_user_message_counts"))
+    __table_args__ = (PrimaryKeyConstraint("date", "user_id", "channel_id", name="pk_user_message_counts"),)
 
     date = Column(Date, nullable=False)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
